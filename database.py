@@ -1,8 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
-db_path= open("db_path.txt", "r").readline()
+from config import db_path
 
 URL_DATABASE = db_path
 
