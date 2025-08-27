@@ -26,7 +26,7 @@ class Parts(Base):
 	__tablename__ = 'parts'
 	id = Column(Integer, primary_key=True, index=True)
 	name = Column(String, index=True)
-	stats = Column(Integer, ForeignKey('stats.id'))
+	stats = Column(Integer, ForeignKey('stats.id'), nullable=True)
 	color = Column(String, index=True)
 	type = Column(Integer, ForeignKey('part_types.id'))
 	restriction = Column(Integer, ForeignKey('restrictions.id'), nullable=True, default=None)
@@ -39,8 +39,8 @@ class Stats(Base):
 	maxAtk = Column(Integer, nullable=True, default=None)
 	minDef = Column(Integer, nullable=True, default=None)
 	maxDef = Column(Integer, nullable=True, default=None)
-	minStamina = Column(Integer, nullable=True, default=None)
-	maxStamina = Column(Integer, nullable=True, default=None)
+	minSta = Column(Integer, nullable=True, default=None)
+	maxSta = Column(Integer, nullable=True, default=None)
 	weight = Column(Integer, nullable=True, default=None)
 	burst = Column(Integer, nullable=True, default=None)
 	dash = Column(Integer, nullable=True, default=None)
@@ -50,15 +50,15 @@ class Combos(Base):
 	id = Column(Integer, primary_key=True, index=True)
 	isStock = Column(Boolean, default=False)
 	line = Column(Integer, ForeignKey('lines.id'))
-	lock_chip = Column(Integer, ForeignKey('parts.id'))
-	main_blade = Column(Integer, ForeignKey('parts.id'))
-	assis_blade = Column(Integer, ForeignKey('parts.id'))
-	ratchet = Column(Integer, ForeignKey('parts.id'))
-	bit = Column(Integer, ForeignKey('parts.id'))
-	combo_type = Column(String, index=True)
+	lock_chip = Column(Integer, ForeignKey('parts.id'), nullable=True, default=None)
+	main_blade = Column(Integer, ForeignKey('parts.id'), nullable=True, default=None)
+	assis_blade = Column(Integer, ForeignKey('parts.id'), nullable=True, default=None)
+	ratchet = Column(Integer, ForeignKey('parts.id'), nullable=True, default=None)
+	bit = Column(Integer, ForeignKey('parts.id'), nullable=True, default=None)
+	combo_type = Column(String, nullable=True, default=None)
 	description = Column(String)
 	created_date = Column(DateTime, default=datetime.now)
- 
+
 class Lines(Base):
     __tablename__ = 'lines'
     id = Column(Integer, primary_key=True, index=True)
